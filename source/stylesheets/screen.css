@@ -446,7 +446,7 @@ a {
     -moz-transition: color 0.2s;
     -o-transition: color 0.2s;
     transition: color 0.2s;
-    /* text-decoration: none; */
+    text-decoration: none;
 }
 
 .main-header {
