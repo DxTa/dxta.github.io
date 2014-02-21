@@ -1,66 +1,46 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>dxta Portfolio</title>
-  <meta name="author" content="Dx Ta">
-
-  
-  <meta name="description" content=" Blog Archives Recent Posts ">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
+  <link rel="dns-prefetch" href="//use.typekit.net">
+  <link rel="dns-prefetch" href="//www.google-analytics.com">
+  <link rel="dns-prefetch" href="//disqus.com">
+  <link rel="dns-prefetch" href="//mediacdn.disqus.com">
+  <link rel="dns-prefetch" href="//www.gravatar.com">
+  <title>dxta 's Portfolio - Developer</title>
+  <meta name="description" content="Blog Archives Recent Posts GitHub Repos Status updating&#8230; $(document).ready(function(){ if (!window.jXHR){ var jxhr = document.createElement(' &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
   <link rel="canonical" href="http://DxTa.github.io">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="dxta Portfolio" type="application/atom+xml">
+  <link href="/favicon.ico" rel="shortcut icon">
+  <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="/stylesheets/screen.css" rel="stylesheet">
+  <link href="/stylesheets/widescreen.css" rel="stylesheet" media="screen and (min-width: 45em)">
+  
+  <script src="//use.typekit.net/yry3bon.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-
+  <link href="/atom.xml" rel="alternate" title="dxta 's Portfolio" type="application/atom+xml">
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">dxta Portfolio</a></h1>
-  
-    <h2>A blogging framework for hackers.</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:DxTa.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
+<body >
+  <header class="main-header" role="banner">
+        <h1><a href="/">dxta 's Portfolio</a> &mdash; Developer</h1>
+    <nav role="navigation">
+      <ul class="main-nav">
+  <li><a href="/">Home</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/work">Work</a></li>
+  <li><a href="/about">About</a></li>
 </ul>
 
-</nav>
+    </nav>
+  </header>
   <div id="main">
     <div id="content">
       <div class="blog-index">
@@ -75,13 +55,50 @@
 <aside class="sidebar">
   
     <section>
-  <h1>Recent Posts</h1>
+  <h2>Recent Posts</h2>
   <ul id="recent_posts">
     
   </ul>
 </section>
 
+<section>
+  <h2>GitHub Repos</h2>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
 
+        github.showRepos({
+            user: 'DxTa',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+<section class="googleplus">
+  <h2>
+    <a href="https://plus.google.com/115109808691874046662?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h2>
+</section>
 
 
 
@@ -90,29 +107,30 @@
 
     </div>
   </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Dx Ta -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <footer class="footer" role="contentinfo"><p>
+  &copy; 2014 Dx Ta
+  <span class="credit">&mdash; Powered by <a href="http://octopress.org">Octopress</a>, fonts served by <a href="https://typekit.com/colophons/yry3bon">Typekit</a>, hosted by <a href="https://github.com/jameslutley/jameslutley.github.com/">GitHub</a>.</span>
 </p>
+
+<p class="top"><a href="#">Back to top &uarr;</a></p>
 
 </footer>
   
 
+<script type="text/javascript">
+      var disqus_shortname = 'dxta';
+      var disqus_developer = 1;
 
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 
