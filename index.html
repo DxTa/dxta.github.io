@@ -57,8 +57,8 @@
   <a class="flex-down" href="#slide"></a>
 </div>
 
-<div id="slide" style="padding: 15% 0; display: none;">
-  <div class="flexslider">
+<div id="slide" style="display: none;">
+  <div class="flexslider" style="margin: auto 0;">
     <ul class="slides">
       <li>
         <img src="http://www.vpwallpapers.com/wp-content/uploads/2013/11/Emma-Watson-2.jpg" />
@@ -89,7 +89,9 @@
       initDelay: 1000
     });
     $('#slide').css('height',window.innerHeight);
-    $('#main-quote').fadeIn();
+    $('#main-quote').fadeIn(2000, function(){
+      $(this).css('display','inline-flex');
+    });
     $('#slide').fadeIn();
     $(window).bind('orientationchange', function(){
       $('.main-quote').css('height',window.innerHeight - $('header').innerHeight() - 41 );
