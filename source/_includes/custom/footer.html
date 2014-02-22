@@ -4,3 +4,24 @@
 </p>
 
 <p class="top"><a href="#">Back to top &uarr;</a></p>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('a[href^="#"]').on('click',function (e) {
+        e.preventDefault();
+
+        if (this.hash) {
+          $target = $(this.hash);
+        } else {
+          $target =  $('body');
+          target = '';
+        }
+
+        $('html, body').stop().animate({
+            'scrollTop': $target.offset().top
+        }, 400, 'swing', function () {
+            window.location.hash = target;
+        });
+    });
+  });
+</script>

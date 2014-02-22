@@ -3,6 +3,7 @@
 # ----------------------- #
 
 url: http://DxTa.github.io
+title: Ta Minh Duc
 subtitle: Developer
 author: Dx Ta
 # simple_search: http://google.com/search
@@ -99,4 +100,3 @@ google_analytics_tracking_id:
 # Facebook Like
 facebook_like: true
 
-title: dxta 's Portfolio

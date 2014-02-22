@@ -2,28 +2,49 @@
 layout: default
 ---
 
-<div class="blog-index">
-  {% assign index = true %}
-  {% for post in paginator.posts %}
-  {% assign content = post.content %}
-    <article class="article">
-      {% include article.html %}
-    </article>
-  {% endfor %}
-  <div class="pagination">
-    {% if paginator.next_page %}
-      <a class="prev" href="{{paginator.next_page}}">&larr; Older</a>
-    {% endif %}
-    <a href="/blog/archives">Blog Archives</a>
-    {% if paginator.previous_page %}
-    <a class="next" href="{{paginator.previous_page}}">Newer &rarr;</a>
-    {% endif %}
+<div id="main-quote" style="text-align: center; height: 100%; min-height: 520px;">
+  <div class="main-quote" style="height: 100%;">
+    <h2>
+      <span class="line"></span>
+      <span class="quote">aloha</span>
+      <span class="line"></span>
+      <small>dxta</small>
+    </h2>
+
+    <a class="flex-down" style="top: 43%; position: relative; display: block;"href="#slide"></a>
   </div>
 </div>
-<aside class="sidebar">
-  {% if site.blog_index_asides.size %}
-    {% include_array blog_index_asides %}
-  {% else %}
-    {% include_array default_asides %}
-  {% endif %}
-</aside>
+
+<div id="slide" style="padding-top: 40px; display: none;">
+  <div class="flexslider">
+    <ul class="slides">
+      <li>
+        <img src="http://www.vpwallpapers.com/wp-content/uploads/2013/11/Emma-Watson-2.jpg" />
+      </li>
+      <li>
+        <img src="http://newsplies.com/wp-content/uploads/2014/01/Emma-Watson-Pictures-6.jpg" />
+      </li>
+      <li>
+        <img src="http://www.100hdwallpapers.com/wallpapers/1280x1024/emma_watson_crazy_looks_1-standard_wallpapers.jpg" />
+      </li>
+      <li>
+        <img src="http://www.hdwallpapers.in/walls/emma_watson_widescreen_3-wide.jpg" />
+      </li>
+      <li>
+        <img src="http://foundwalls.com/wallpapers/2012/08/Emma-Watson-16-900x1600.jpg" />
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  window.onload =  function(){
+    $('.flexslider').flexslider({
+      animation: "slide",
+      smoothHeight: true,
+      initDelay: 1000
+    });
+    $('#slide').fadeIn();
+  };
+</script>
