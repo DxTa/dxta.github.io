@@ -377,7 +377,7 @@ h2,h3,h4,h5,h6 {
     padding: .75em 0 .25em;
     font-style: normal;
     font-weight: 400;
-    /* text-transform: uppercase; */
+    text-transform: uppercase;
     letter-spacing: .15em
 }
 
@@ -414,19 +414,19 @@ h5,h6 {
 }
 
 ::-moz-selection {
-    background: #4E1E1B
+    background: #83433F
 }
 
 ::selection {
-    background: #4E1E1B
+    background: #83433F
 }
 
 a {
-    color: #4E1E1B
+    color: #83433F
 }
 
 a:visited {
-    color: #4E1E1B
+    color: #83433F
 }
 
 a:focus {
@@ -490,7 +490,7 @@ a {
 }
 
 .entry-title a em,.entry-title em,.entry-title a span,.entry-title span {
-    color: #4E1E1B
+    color: #83433F
 }
 
 .entry-title a span,.entry-title span {
@@ -706,7 +706,7 @@ footer p {
 
 .main-quote  h2 span.line {
   display: block;
-  border-top: 2px #4E1E1B solid;
+  border-top: 2px #83433F solid;
   margin: 30px auto;
   overflow: hidden;
   width: 40%;
@@ -760,6 +760,6 @@ footer p {
 
 #about .intro {
   display: inline-block;
-  vertical-align: top;
+  /* vertical-align: top; */
   padding-left: 50px;
 }
