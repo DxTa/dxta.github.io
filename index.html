@@ -9,7 +9,7 @@
   <link rel="dns-prefetch" href="//mediacdn.disqus.com">
   <link rel="dns-prefetch" href="//www.gravatar.com">
   <title>Ta Minh Duc - Developer</title>
-  <meta name="description" content="aloha dxta window.onload = function(){ $('.flexslider').flexslider({ animation: "slide", smoothHeight: true, initDelay: 1000 }); $('#slide').fadeIn &hellip;">
+  <meta name="description" content="aloha dxta window.onload = function(){ $('.main-quote').css('height',window.innerHeight - $('header').innerHeight() - 41 ); $('.flexslider'). &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="http://DxTa.github.io">
   <link href="/favicon.ico" rel="shortcut icon">
@@ -45,17 +45,16 @@
   </header>
   <div id="main">
     <div id="content">
-      <div id="main-quote" style="text-align: center; height: 100%; min-height: 520px;">
-  <div class="main-quote" style="height: 100%;">
+      <div id="main-quote" style="text-align: center; display: none;">
+  <div class="main-quote">
     <h2>
       <span class="line"></span>
       <span class="quote">aloha</span>
       <span class="line"></span>
       <small>dxta</small>
     </h2>
-
-    <a class="flex-down" style="top: 43%; position: relative; display: block;"href="#slide"></a>
   </div>
+  <a class="flex-down" href="#slide"></a>
 </div>
 
 <div id="slide" style="padding-top: 40px; display: none;">
@@ -83,11 +82,13 @@
 <script type="text/javascript">
 
   window.onload =  function(){
+    $('.main-quote').css('height',window.innerHeight - $('header').innerHeight() - 41 );
     $('.flexslider').flexslider({
       animation: "slide",
       smoothHeight: true,
       initDelay: 1000
     });
+    $('#main-quote').fadeIn();
     $('#slide').fadeIn();
   };
 </script>
