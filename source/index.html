@@ -2,17 +2,16 @@
 layout: default
 ---
 
-<div id="main-quote" style="text-align: center; height: 100%; min-height: 520px;">
-  <div class="main-quote" style="height: 100%;">
+<div id="main-quote" style="text-align: center; display: none;">
+  <div class="main-quote">
     <h2>
       <span class="line"></span>
       <span class="quote">aloha</span>
       <span class="line"></span>
       <small>dxta</small>
     </h2>
-
-    <a class="flex-down" style="top: 43%; position: relative; display: block;"href="#slide"></a>
   </div>
+  <a class="flex-down" href="#slide"></a>
 </div>
 
 <div id="slide" style="padding-top: 40px; display: none;">
@@ -40,11 +39,13 @@ layout: default
 <script type="text/javascript">
 
   window.onload =  function(){
+    $('.main-quote').css('height',window.innerHeight - $('header').innerHeight() - 41 );
     $('.flexslider').flexslider({
       animation: "slide",
       smoothHeight: true,
       initDelay: 1000
     });
+    $('#main-quote').fadeIn();
     $('#slide').fadeIn();
   };
 </script>
