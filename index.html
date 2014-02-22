@@ -57,7 +57,7 @@
   <a class="flex-down" href="#slide"></a>
 </div>
 
-<div id="slide" style="padding-top: 40px; display: none;">
+<div id="slide" style="padding-top: 40px; display: none; vertical-align: middle">
   <div class="flexslider">
     <ul class="slides">
       <li>
@@ -90,7 +90,9 @@
     });
     $('#slide').css('height',window.innerHeight);
     $('#main-quote').fadeIn();
-    $('#slide').fadeIn();
+    $('#slide').fadeIn("2000", function(){
+      $(this).css('display','table-cell');
+    });
     $(window).bind('orientationchange', function(){
       $('.main-quote').css('height',window.innerHeight - $('header').innerHeight() - 41 );
       $('#slide').css('height',window.innerHeight);
