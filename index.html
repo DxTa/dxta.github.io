@@ -89,9 +89,10 @@
       initDelay: 1000
     });
     $('#slide').css('height',window.innerHeight);
-    $('#slide .flexslider').css('top', ($('#slide').height() - $('#slide .flexslider').height())/2);
     $('#main-quote').fadeIn();
-    $('#slide').fadeIn();
+    $('#slide').fadeIn(2000, function(){
+      $('#slide .flexslider').css('top', ($('#slide').height() - $('#slide .flexslider').height())/2);
+    });
     $(window).bind('orientationchange', function(){
       $('.main-quote').css('height',window.innerHeight - $('header').innerHeight() - 41 );
       $('#slide').css('height',window.innerHeight);
