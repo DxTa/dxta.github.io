@@ -89,12 +89,13 @@
       initDelay: 1000
     });
     $('#slide').css('height',window.innerHeight);
-    $('#slide .flexslider').css('top', ($('#slide').height() - $(this).height())/2)
+    $('#slide .flexslider').css('top', ($('#slide').height() - $(this).height())/2);
     $('#main-quote').fadeIn();
     $('#slide').fadeIn();
     $(window).bind('orientationchange', function(){
       $('.main-quote').css('height',window.innerHeight - $('header').innerHeight() - 41 );
       $('#slide').css('height',window.innerHeight);
+      $('#slide .flexslider').css('top', ($('#slide').height() - $(this).height())/2);
     });
   };
 </script>
