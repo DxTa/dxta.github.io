@@ -94,11 +94,9 @@
       $('#slide .flexslider').css('top', ($('#slide').height() - $('#slide .flexslider').height())/2);
     });
     $(window).bind('orientationchange', function(){
-      $('#slide').fadeOut().css('height',window.innerHeight);
-      $('#main-quote').fadeOut().fadeIn();
-      $('#slide').fadeIn(2000, function(){
-        $('#slide .flexslider').css('top', ($('#slide').height() - $('#slide .flexslider').height())/2);
-      });
+      $('.main-quote').css('height',window.innerHeight - $('header').innerHeight() - 41 );
+      $('#slide').css('height',window.innerHeight);
+      $('#slide .flexslider').css('top', ($('#slide').height() - $('#slide .flexslider').height())/2);
     });
   };
 </script>
