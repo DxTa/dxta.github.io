@@ -142,37 +142,37 @@ blockquote {
     }
 }
 
-@media only screen and (min-width: 80em) {
-    body {
-        font-size:1.25em;
-        width: 70%
-    }
+/* @media only screen and (min-width: 80em) { */
+    /* body { */
+        /* font-size:1.25em; */
+        /* width: 70% */
+    /* } */
 
-    h1 {
-        font-size: 4.5em;
-        line-height: 1.2em
-    }
+    /* h1 { */
+        /* font-size: 2.5em; */
+        /* line-height: 1.2em */
+    /* } */
 
-    .entry-title a em,.entry-title em {
-        display: block;
-        text-align: right
-    }
+    /* .entry-title a em,.entry-title em { */
+        /* display: block; */
+        /* text-align: right */
+    /* } */
 
-    .entry-content,.hentry footer,.pagination,.comments,.page-content {
-        width: 70%
-    }
+    /* .entry-content,.hentry footer,.pagination,.comments,.page-content { */
+        /* [> width: 70% <] */
+    /* } */
 
-    .entry-content p:first-child,.page-content p:first-child {
-        font-size:1.5em
-    }
+    /* .entry-content p:first-child,.page-content p:first-child { */
+        /* font-size:1.5em */
+    /* } */
 
-    .blog-archives article h2,.work-items section h2 {
-        font-size: 2em;
-        line-height: 1.5em
-    }
+    /* .blog-archives article h2,.work-items section h2 { */
+        /* font-size: 1.3em; */
+        /* line-height: 1.5em */
+    /* } */
 
-    .blog-archives article time,.work-items section span {
-        font-size: 1.125em;
-        line-height: 3.2em
-    }
-}
+    /* .blog-archives article time,.work-items section span { */
+        /* font-size: 1.125em; */
+        /* line-height: 3.2em */
+    /* } */
+/* } */
