@@ -202,10 +202,21 @@
             window.location.hash = target;
         });
     });
+    $(function() {
+        $("img.lazy").lazyload();
+    });
+
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+        $(this).attr('target', '_blank');
+      });
+    }
+
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
   });
-  $(function() {
-      $("img.lazy").lazyload();
-  });
+
 </script>
 
 </footer>

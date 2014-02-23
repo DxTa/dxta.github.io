@@ -287,10 +287,21 @@ letting you know someone is currently trying to login to your macbook.</p>
             window.location.hash = target;
         });
     });
+    $(function() {
+        $("img.lazy").lazyload();
+    });
+
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+        $(this).attr('target', '_blank');
+      });
+    }
+
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
   });
-  $(function() {
-      $("img.lazy").lazyload();
-  });
+
 </script>
 
 </footer>

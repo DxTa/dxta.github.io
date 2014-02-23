@@ -134,10 +134,21 @@ Invalid Login Snapping: Prevent Invalid Login Attempts Script for OSX Recent Pos
             window.location.hash = target;
         });
     });
+    $(function() {
+        $("img.lazy").lazyload();
+    });
+
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+        $(this).attr('target', '_blank');
+      });
+    }
+
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
   });
-  $(function() {
-      $("img.lazy").lazyload();
-  });
+
 </script>
 
 </footer>
