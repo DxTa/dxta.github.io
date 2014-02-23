@@ -4,7 +4,7 @@
   <title><![CDATA[Ta Minh Duc]]></title>
   <link href="http://DxTa.github.io/atom.xml" rel="self"/>
   <link href="http://DxTa.github.io/"/>
-  <updated>2014-02-23T16:23:02+07:00</updated>
+  <updated>2014-02-23T23:21:19+07:00</updated>
   <id>http://DxTa.github.io/</id>
   <author>
     <name><![CDATA[Dx Ta]]></name>
@@ -12,5 +12,111 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Invalid Login Snapping: Prevent Invalid Login Attempts Script for OSX]]></title>
+    <link href="http://DxTa.github.io/blog/2014/02/23/invalid-login-snapping-prevent-invalid-login-attempts-script-for-osx/"/>
+    <updated>2014-02-23T19:54:05+07:00</updated>
+    <id>http://DxTa.github.io/blog/2014/02/23/invalid-login-snapping-prevent-invalid-login-attempts-script-for-osx</id>
+    <content type="html"><![CDATA[<p>This script will take a snapshot on failed login attempts, email it to your email account,
+letting you know someone is currently trying to login to your macbook.</p>
+
+<h2>Requirement</h2>
+
+<pre><code>1. imagesnap
+2. whereami
+3. An email account (I'm currently using Gmail)
+</code></pre>
+
+<h2>Configure Email</h2>
+
+<p>Append the following line to <strong>/etc/postfix/main.cf</strong></p>
+
+<figure class='code'><figcaption><span>/etc/post/fix/main.cf</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">relayhost</span><span class="o">=</span>smtp.gmail.com:587
+</span><span class='line'><span class="nv">smtp_sasl_auth_enable</span><span class="o">=</span>yes
+</span><span class='line'><span class="nv">smtp_sasl_password_maps</span><span class="o">=</span><span class="nb">hash</span>:/etc/postfix/sasl_passwd
+</span><span class='line'><span class="nv">smtp_sasl_security_options</span><span class="o">=</span>
+</span><span class='line'><span class="nv">smtp_use_tls</span><span class="o">=</span>yes
+</span><span class='line'><span class="nv">smtp_tls_security_level</span><span class="o">=</span>encrypt
+</span><span class='line'><span class="nv">tls_random_source</span><span class="o">=</span>dev:/dev/urandom
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create <strong>/etc/postfix/sasl_passwd</strong> and populate following example below:</p>
+
+<pre><code>smtp.gmail.com:587 account@gmail.com:password
+</code></pre>
+
+<p>Then run:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>postmap /etc/postfix/sasl_passwd; chmod 600 /etc/postfix/sasl_passwd*
+</span><span class='line'>postfix stop
+</span><span class='line'>postfix start
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Enable Logging Failed Attempt</h2>
+
+<p>Append this line to <strong>/etc/asl.conf</strong></p>
+
+<pre><code># Facility loginwindow gets saved in loginwindow.log
+? [= Sender loginwindow] file /var/log/loginwindow.log mode=0640 format=bsd
+</code></pre>
+
+<p>Restart syslogd</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo launchctl unload /System/Library/LaunchDaemons/com.apple.syslogd.plist
+</span><span class='line'>sudo launchctl load /System/Library/LaunchDaemons/com.apple.syslogd.plist
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Scripting</h2>
+
+<p>Create script <strong>/usr/local/bin/invalid_login_snap</strong> :</p>
+
+<p><strong>Remember to change email to yours</strong>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">runcheck</span><span class="o">=</span><span class="sb">`</span>ps -ef|grep -v grep|grep <span class="s1">&#39;tail -f /var/log/loginwindow.log&#39;</span> &gt; /dev/null;echo <span class="nv">$?</span><span class="sb">`</span>
+</span><span class='line'><span class="nv">zero</span><span class="o">=</span>0;
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="nv">$runcheck</span> -ne <span class="nv">$zero</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">  </span>nohup tail -f /var/log/loginwindow.log| awk <span class="s1">&#39;/The authtok is incorrect/ {system(&quot;/usr/local/bin/imagesnap /var/tmp/.snap.jpg &gt; /dev/null; \(curl ipecho.net/plain ; echo; /usr/local/bin/whereami; uuencode /var/tmp/.snap.jpg snap.jpg\)\|mailx -s \&quot;Macbook Invalid Login Attempt\&quot; ductm310@gmail.com; echo \&quot;Someone Is Trying To Log Into Your Macbook Check Gmail for Snapshot\&quot; \|rm -f /var/tmp/.snap.jpg&quot;)}&#39;</span> &amp;
+</span><span class='line'>var/tmp/.snap.jpg
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Make sure your script is executable</strong></p>
+
+<h2>Autostart</h2>
+
+<p>There are many ways to make this script autostart.</p>
+
+<p>I use Automator to create application executing this script and add to StartupItems.</p>
+]]></content>
+  </entry>
   
 </feed>
