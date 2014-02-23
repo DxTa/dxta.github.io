@@ -20,11 +20,11 @@
   <link href="/stylesheets/widescreen.css" rel="stylesheet" media="screen and (min-width: 45em)">
   <link href="/stylesheets/flexslider.css" rel="stylesheet">
   
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <script src="/javascripts/jquery.flexslider-min.js"></script>
+  <script src="/javascripts/jquery.lazyload.min.js"></script>
+  <script src="/javascripts/modernizr-2.0.js"></script>
   <link href="/atom.xml" rel="alternate" title="Ta Minh Duc" type="application/atom+xml">
 </head>
 
@@ -48,7 +48,7 @@
 </h2>
 <div id='about'>
   <div class='pic'>
-    <img src='https://uuzmjq.dm2304.livefilestore.com/y2pwDhzD3Xoq3seH3MxoPSbT9Hkz0osHOsMxw5FpUo3sNF0e3ItQnTMq_wfHJZvMNHlELUWzNAr3KvUspPHmkLYtcowqFgYuPwtGNXOVoRwjOY/IMG_0047.jpg?psid=1' />
+    <img class='lazy' data-original='https://uuzmjq.dm2304.livefilestore.com/y2pwDhzD3Xoq3seH3MxoPSbT9Hkz0osHOsMxw5FpUo3sNF0e3ItQnTMq_wfHJZvMNHlELUWzNAr3KvUspPHmkLYtcowqFgYuPwtGNXOVoRwjOY/IMG_0047.jpg?psid=1' height='200' width='200' />
   </div>
   <div class='intro'>
     <h1 class='entry-title'>
@@ -202,7 +202,9 @@
         });
     });
   });
-
+  $(function() {
+      $("img.lazy").lazyload();
+  });
 </script>
 
 </footer>

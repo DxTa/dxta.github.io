@@ -20,11 +20,11 @@
   <link href="/stylesheets/widescreen.css" rel="stylesheet" media="screen and (min-width: 45em)">
   <link href="/stylesheets/flexslider.css" rel="stylesheet">
   
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <script src="/javascripts/jquery.flexslider-min.js"></script>
+  <script src="/javascripts/jquery.lazyload.min.js"></script>
+  <script src="/javascripts/modernizr-2.0.js"></script>
   <link href="/atom.xml" rel="alternate" title="Ta Minh Duc" type="application/atom+xml">
 </head>
 
@@ -59,49 +59,49 @@
   <div class="flexslider">
     <ul class="slides">
       <li>
-        <img src="/images/slide/20140120-1605-dn346.jpg" />
+        <img class="lazy" data-original="/images/slide/20140120-1605-dn346.jpg" />
       </li>
       <li>
-        <img src="/images/slide/20140120-1620-dn370.jpg" />
+        <img class="lazy" data-original="/images/slide/20140120-1620-dn370.jpg" />
       </li>
       <li>
-        <img src="/images/slide/20140120-1558-dn313.jpg" />
+        <img class="lazy" data-original="/images/slide/20140120-1558-dn313.jpg" />
       </li>
       <li>
-        <img src="/images/slide/20140120-1514-dn255.jpg" />
+        <img class="lazy" data-original="/images/slide/20140120-1514-dn255.jpg" />
       </li>
       <li>
-        <img src="/images/slide/20140120-1458-dn250.jpg" />
+        <img class="lazy" data-original="/images/slide/20140120-1458-dn250.jpg" />
       </li>
       <li>
-        <img src="/images/slide/20140120-1107-dn092.jpg" />
+        <img class="lazy" data-original="/images/slide/20140120-1107-dn092.jpg" />
       </li>
       <li>
-        <img src="/images/slide/20140120-1106-dn089.jpg" />
+        <img class="lazy" data-original="/images/slide/20140120-1106-dn089.jpg" />
       </li>
       <li>
-        <img src="/images/slide/20140120-0959-dn003.jpg" />
+        <img class="lazy" data-original="/images/slide/20140120-0959-dn003.jpg" />
       </li>
       <li>
-        <img src="/images/slide/1779825_746652855347534_1291717136_n.jpg" />
+        <img class="lazy" data-original="/images/slide/1779825_746652855347534_1291717136_n.jpg" />
       </li>
       <li>
-        <img src="/images/slide/IMG_0045.JPG" />
+        <img class="lazy" data-original="/images/slide/IMG_0045.JPG" />
       </li>
       <li>
-        <img src="/images/slide/IMG_0048.JPG" />
+        <img class="lazy" data-original="/images/slide/IMG_0048.JPG" />
       </li>
       <li>
-        <img src="/images/slide/IMG_0021.JPG" />
+        <img class="lazy" data-original="/images/slide/IMG_0021.JPG" />
       </li>
       <li>
-        <img src="/images/slide/WP_000020.jpg" />
+        <img class="lazy" data-original="/images/slide/WP_000020.jpg" />
       </li>
       <li>
-        <img src="/images/slide/WP_000018 (3).jpg" />
+        <img class="lazy" data-original="/images/slide/WP_000018 (3).jpg" />
       </li>
       <li>
-        <img src="/images/slide/WP_000007.jpg" />
+        <img class="lazy" data-original="/images/slide/WP_000007.jpg" />
       </li>
     </ul>
   </div>
@@ -120,8 +120,31 @@
     });
     $('#slide').css('height',window.innerHeight);
     $('#main-quote').fadeIn();
+    $("img[data-original]").lazyload({
+        effect: "fadeIn",
+        skip_invisible: false,
+        event: "forceLazyLoad"
+    });
+    $('.flex-viewport').find('img[data-original]').trigger('forceLazyLoad');
     $('#slide').fadeIn(2000, function(){
       $('#slide .flexslider').css('top', ($('#slide').height() - $('#slide .flexslider').height())/2);
+      images = [
+      '1779825_746652855347534_1291717136_n.jpg',
+      '20140120-1620-dn370.jpg',
+      '20140120-0959-dn003.jpg',
+      'IMG_0021.JPG',
+      '20140120-1106-dn089.jpg',
+      'IMG_0045.JPG',
+      '20140120-1107-dn092.jpg',
+      'IMG_0048.JPG',
+      '20140120-1458-dn250.jpg',
+      'WP_000007.jpg',
+      '20140120-1514-dn255.jpg',
+      'WP_000018 (3).jpg',
+      '20140120-1558-dn313.jpg',
+      'WP_000020.jpg',
+      '20140120-1605-dn346.jpg'
+      ];
     });
     $(window).bind('orientationchange', function(){
       $('.main-quote').css('height',window.innerHeight - $('header').innerHeight() - 41 );
@@ -160,7 +183,9 @@
         });
     });
   });
-
+  $(function() {
+      $("img.lazy").lazyload();
+  });
 </script>
 
 </footer>
