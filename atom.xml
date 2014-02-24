@@ -4,7 +4,7 @@
   <title><![CDATA[Ta Minh Duc]]></title>
   <link href="http://DxTa.github.io/atom.xml" rel="self"/>
   <link href="http://DxTa.github.io/"/>
-  <updated>2014-02-24T14:31:59+07:00</updated>
+  <updated>2014-02-24T14:33:10+07:00</updated>
   <id>http://DxTa.github.io/</id>
   <author>
     <name><![CDATA[Dx Ta]]></name>
@@ -14,9 +14,9 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Invalid Login Snapping Prevent Invalid Login Attempts Script for Osx]]></title>
+    <title type="html"><![CDATA[Invalid Login Snapping: Prevent Invalid Login Attempts Script for OSX]]></title>
     <link href="http://DxTa.github.io/blog/2014/02/23/invalid-login-snapping-prevent-invalid-login-attempts-script-for-osx/"/>
-    <updated>2014-02-23T00:00:00+07:00</updated>
+    <updated>2014-02-23T19:54:05+07:00</updated>
     <id>http://DxTa.github.io/blog/2014/02/23/invalid-login-snapping-prevent-invalid-login-attempts-script-for-osx</id>
     <content type="html"><![CDATA[<p>This script will take a snapshot on failed login attempts, email it to your email account,
 letting you know someone is currently trying to login to your macbook.</p>
