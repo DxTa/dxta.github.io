@@ -52,13 +52,22 @@ end
 # Working with Jekyll #
 #######################
 
-desc "Generate jekyll site"
-task :generate do
+desc "Process Sass"
+task :sass do
   raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
-  puts "## Generating Site with Jekyll"
+  puts "## Generating CSS with Compass"
   system "compass compile --css-dir #{source_dir}/stylesheets"
-  system "jekyll"
 end
+
+desc "Generate jekyll site"
+# task :generate do
+  # raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
+  # puts "## Generating Site with Jekyll"
+  # system "compass compile --css-dir #{source_dir}/stylesheets"
+  # system "jekyll"
+# end
+# task :generate => [:sass, :update_asset_versions, :jekyll, :combine, :minify, :gzip]
+task :generate => [:sass, :update_asset_versions, :jekyll, :combine, :minify]
 
 desc "Watch the site and regenerate when it changes"
 task :watch do
@@ -401,4 +410,107 @@ desc "list tasks"
 task :list do
   puts "Tasks: #{(Rake::Task.tasks - [Rake::Task[:list]]).join(', ')}"
   puts "(type rake -T for more detail)\n\n"
+end
+
+desc "Combine CSS"
+task :combine_css do
+  puts "## Combining CSS"
+  styles_dir = "#{source_dir}/stylesheets"
+  # Watch out! Order of files matters here!
+  system "cat #{styles_dir}/file1.css file2.css... > #{styles_dir}/all.css"
+end
+
+desc "Combine JS"
+task :combine_js do
+  puts "## Combining JS"
+  scripts_dir = "#{source_dir}/javascripts"
+  system "cat #{scripts_dir}/file1.js file2.js... > #{scripts_dir}/all.js"
+end
+
+desc "Combine CSS/JS"
+task :combine => [:combine_css, :combine_js]
+
+# For asset versioning
+asset_version = Time.new.strftime("%y%m%d%H%M")
+
+desc "Minify CSS"
+task :minify_css do
+  puts "## Minifying CSS"
+  input = "#{source_dir}/stylesheets/all.css"
+  output = "#{public_dir}/stylesheets/all.#{asset_version}.css"
+  system "cleancss -e -o #{output} #{input}"
+end
+
+desc "Minify JS"
+task :minify_js do
+  puts "## Minifying JS"
+  input = "#{source_dir}/javascripts/all.js"
+  output = "#{source_dir}/javascripts/all.#{asset_version}.js"
+  smap_option = "--source-map all.#{asset_version}.js.map"
+  smap_root_option = "--source-map-root http://www.eriwen.com"
+  system "uglifyjs #{input} -o #{output} #{smap_option} #{smap_root_option} -p 5 -m -c"
+  Dir.glob("#{source_dir}/javascripts/all.*").each do |f|
+    FileUtils.mv(f, "#{public_dir}/javascripts")
+  end
+end
+
+desc "Minify CSS/JS"
+task :minify => [:minify_css, :minify_js]
+
+desc "GZip HTML"
+task :gzip_html do
+  puts "## GZipping HTML"
+  system 'find public/ -type f -name \*.html -exec gzip -9 {} \;'
+  # Batch rename .html.gz to .html
+  Dir['**/*.html.gz'].each do |f|
+    test(?f, f) and File.rename(f, f.gsub(/\.html\.gz/, '.html'))
+  end
+end
+
+desc "GZip CSS"
+task :gzip_css do
+  puts "## GZipping CSS"
+  styles_dir = "#{public_dir}/stylesheets"
+  system "gzip -9 #{styles_dir}/all.#{asset_version}.css"
+  system "mv #{styles_dir}/all.#{asset_version}.css{.gz,}"
+end
+
+desc "GZip JS"
+task :gzip_js do
+  puts "## GZipping JS"
+  scripts_dir = "#{public_dir}/javascripts"
+  system "gzip -9 #{scripts_dir}/all.#{asset_version}.js"
+  system "mv #{scripts_dir}/all.#{asset_version}.js{.gz,}"
+end
+
+desc "GZip All"
+task :gzip => [:gzip_html, :gzip_css, :gzip_js]
+# task :gzip => [:gzip_html]
+
+desc "Update head include for static assets"
+task :update_asset_versions do
+  puts "## Updating asset versions"
+  # Replace instances of all.js and all.1234.js with all.{version}.js
+  content = ''
+  File.open("#{source_dir}/_includes/head.html", 'r') do |file|
+    content = file.read.gsub(/all(\.\d+)?\./, "all.#{asset_version}.")
+  end
+  File.open("#{source_dir}/_includes/head.html", 'w') do |file|
+    file.write(content)
+  end
+
+  content = ''
+  File.open("#{source_dir}/_includes/after_footer.html", 'r') do |file|
+    content = file.read.gsub(/all(\.\d+)?\./, "all.#{asset_version}.")
+  end
+  File.open("#{source_dir}/_includes/after_footer.html", 'w') do |file|
+    file.write(content)
+  end
+end
+
+desc "Run Jekyll"
+task :jekyll do
+  raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
+  puts "## Generating Site with Jekyll"
+  system "jekyll"
 end

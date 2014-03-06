@@ -1,5 +1,7 @@
 ---
 layout: default
+keywords: dxta, ta minh duc, portfolio
+description: Ta Minh Duc 's Porftfolio
 ---
 
 <div id="main-quote" style="text-align: center; display: none;">
@@ -14,23 +16,53 @@ layout: default
   <a class="flex-down" href="#slide"></a>
 </div>
 
-<div id="slide" style="padding-top: 40px; display: none;">
+<div id="slide" style="display: none;">
   <div class="flexslider">
     <ul class="slides">
       <li>
-        <img src="http://www.vpwallpapers.com/wp-content/uploads/2013/11/Emma-Watson-2.jpg" />
+        <img class="lazy" data-original="/images/slide/20140120-1605-dn346.jpg" />
       </li>
       <li>
-        <img src="http://newsplies.com/wp-content/uploads/2014/01/Emma-Watson-Pictures-6.jpg" />
+        <img class="lazy" data-original="/images/slide/20140120-1620-dn370.jpg" />
       </li>
       <li>
-        <img src="http://www.100hdwallpapers.com/wallpapers/1280x1024/emma_watson_crazy_looks_1-standard_wallpapers.jpg" />
+        <img class="lazy" data-original="/images/slide/20140120-1558-dn313.jpg" />
       </li>
       <li>
-        <img src="http://www.hdwallpapers.in/walls/emma_watson_widescreen_3-wide.jpg" />
+        <img class="lazy" data-original="/images/slide/20140120-1514-dn255.jpg" />
       </li>
       <li>
-        <img src="http://foundwalls.com/wallpapers/2012/08/Emma-Watson-16-900x1600.jpg" />
+        <img class="lazy" data-original="/images/slide/20140120-1458-dn250.jpg" />
+      </li>
+      <li>
+        <img class="lazy" data-original="/images/slide/20140120-1107-dn092.jpg" />
+      </li>
+      <li>
+        <img class="lazy" data-original="/images/slide/20140120-1106-dn089.jpg" />
+      </li>
+      <li>
+        <img class="lazy" data-original="/images/slide/20140120-0959-dn003.jpg" />
+      </li>
+      <li>
+        <img class="lazy" data-original="/images/slide/1779825_746652855347534_1291717136_n.jpg" />
+      </li>
+      <li>
+        <img class="lazy" data-original="/images/slide/IMG_0045.JPG" />
+      </li>
+      <li>
+        <img class="lazy" data-original="/images/slide/IMG_0048.JPG" />
+      </li>
+      <li>
+        <img class="lazy" data-original="/images/slide/IMG_0021.JPG" />
+      </li>
+      <li>
+        <img class="lazy" data-original="/images/slide/WP_000020.jpg" />
+      </li>
+      <li>
+        <img class="lazy" data-original="/images/slide/WP_000018 (3).jpg" />
+      </li>
+      <li>
+        <img class="lazy" data-original="/images/slide/WP_000007.jpg" />
       </li>
     </ul>
   </div>
@@ -43,9 +75,42 @@ layout: default
     $('.flexslider').flexslider({
       animation: "slide",
       smoothHeight: true,
+      touch: true,
+      keyboard: true,
       initDelay: 1000
     });
+    $('#slide').css('height',window.innerHeight);
     $('#main-quote').fadeIn();
-    $('#slide').fadeIn();
+    $("img[data-original]").lazyload({
+        effect: "fadeIn",
+        skip_invisible: false,
+        event: "forceLazyLoad"
+    });
+    $('.flex-viewport').find('img[data-original]').trigger('forceLazyLoad');
+    $('#slide').fadeIn(2000, function(){
+      $('#slide .flexslider').css('top', ($('#slide').height() - $('#slide .flexslider').height())/2);
+      images = [
+      '1779825_746652855347534_1291717136_n.jpg',
+      '20140120-1620-dn370.jpg',
+      '20140120-0959-dn003.jpg',
+      'IMG_0021.JPG',
+      '20140120-1106-dn089.jpg',
+      'IMG_0045.JPG',
+      '20140120-1107-dn092.jpg',
+      'IMG_0048.JPG',
+      '20140120-1458-dn250.jpg',
+      'WP_000007.jpg',
+      '20140120-1514-dn255.jpg',
+      'WP_000018 (3).jpg',
+      '20140120-1558-dn313.jpg',
+      'WP_000020.jpg',
+      '20140120-1605-dn346.jpg'
+      ];
+    });
+    $(window).bind('orientationchange', function(){
+      $('.main-quote').css('height',window.innerHeight - $('header').innerHeight() - 41 );
+      $('#slide').css('height',window.innerHeight);
+      $('#slide .flexslider').css('top', ($('#slide').height() - $('#slide .flexslider').height())/2);
+    });
   };
 </script>

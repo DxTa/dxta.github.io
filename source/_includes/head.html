@@ -9,22 +9,21 @@
   <link rel="dns-prefetch" href="//www.gravatar.com">
   <title>{% if page.title %}{{ page.title | strip_html }} - {% endif %}{{ site.title }} - {{ site.subtitle }}</title>
   {% capture description %}{% if page.description %}{{ page.description }}{% else %}{{ content | raw_content }}{% endif %}{% endcapture %}<meta name="description" content="{{ description | strip_html | condense_spaces | truncate:150 }}">
-  {% if page.keywords %}<meta name="keywords" content="{{ page.keywords }}">{% endif %}<meta name="viewport" content="width=device-width, initial-scale=1">
+  {% if page.keywords %}<meta name="keywords" content="{{ page.keywords }}, {{ site.keywords}}">{% endif %}<meta name="viewport" content="width=device-width, initial-scale=1">
   {% capture canonical %}{{ site.url }}{% if site.permalink contains '.html' %}{{ page.url }}{% else %}{{ page.url | remove:'index.html' | strip_slash }}{% endif %}{% endcapture %}<link rel="canonical" href="{{ canonical }}">
   <link href="{{ root_url }}/favicon.ico" rel="shortcut icon">
   <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
   <link href="{{ root_url }}/stylesheets/screen.css" rel="stylesheet">
-  <link href="{{ root_url }}/stylesheets/widescreen.css" rel="stylesheet" media="screen and (min-width: 45em)">
-  <link href="{{ root_url }}/stylesheets/flexslider.css" rel="stylesheet">
   {% if page.style %}<link href="{{ root_url }}/stylesheets/art-direction/{{ page.style }}" rel="stylesheet">{% endif %}
-  <script src="//use.typekit.net/yry3bon.js"></script>
-  <script>try{Typekit.load();}catch(e){}</script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="{{ root_url }}/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="{{ root_url }}/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="{{ root_url }}/javascripts/octopress.js" type="text/javascript"></script>
   <script src="{{ root_url }}/javascripts/jquery.flexslider-min.js"></script>
+  <script src="{{ root_url }}/javascripts/jquery.lazyload.min.js"></script>
   <link href="{{ site.subscribe_rss }}" rel="alternate" title="{{site.title}}" type="application/atom+xml">
+  {% include google_analytics.html %}
 </head>
+

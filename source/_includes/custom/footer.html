@@ -1,6 +1,6 @@
 <p>
   &copy; {{ site.time | date: "%Y" }} {{ site.author }}
-  <span class="credit">&mdash; Powered by <a href="http://octopress.org">Octopress</a>, fonts served by <a href="https://typekit.com/colophons/yry3bon">Typekit</a>, hosted by <a href="https://github.com/jameslutley/jameslutley.github.com/">GitHub</a>.</span>
+  <span class="credit">&mdash; Powered by <a href="http://octopress.org">Octopress</a>, fonts served by <a href="https://typekit.com/colophons/yry3bon">Typekit</a>, hosted by <a href="https://github.com/DxTa/dxta.github.io">GitHub</a>.</span>
 </p>
 
 <p class="top"><a href="#">Back to top &uarr;</a></p>
@@ -12,6 +12,7 @@
 
         if (this.hash) {
           $target = $(this.hash);
+          target = this.hash;
         } else {
           $target =  $('body');
           target = '';
@@ -23,5 +24,16 @@
             window.location.hash = target;
         });
     });
+    $(function() {
+        $("img.lazy").lazyload();
+    });
+
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+        $(this).attr('target', '_blank');
+      });
+    }
+
   });
 </script>
+
