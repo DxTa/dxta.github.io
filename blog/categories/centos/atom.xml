@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: centos | Ta Minh Duc]]></title>
+  <link href="http://DxTa.github.io/blog/categories/centos/atom.xml" rel="self"/>
+  <link href="http://DxTa.github.io/"/>
+  <updated>2014-03-06T14:40:03+07:00</updated>
+  <id>http://DxTa.github.io/</id>
+  <author>
+    <name><![CDATA[Dx Ta]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Init Script for Sidekiq in Centos]]></title>
+    <link href="http://DxTa.github.io/blog/2014/03/06/init-script-for-sidekiq-in-centos/"/>
+    <updated>2014-03-06T13:56:07+07:00</updated>
+    <id>http://DxTa.github.io/blog/2014/03/06/init-script-for-sidekiq-in-centos</id>
+    <content type="html"><![CDATA[<p>Sidekiq is a simple, efficient background processing for Ruby.
+more_info: sidekiq.org</p>
+
+<p>Sidekiq is easy to use, easy to setup. However, to make sidekiq run at startup is not so easy.
+There &rsquo;s also a nice script here (<a href="https://github.com/mperham/sidekiq/blob/master/examples/sidekiq">https://github.com/mperham/sidekiq/blob/master/examples/sidekiq</a>),
+although I &rsquo;ve got few problems with it.</p>
+
+<p>If we have another user for deploying, then command <strong>bundle exec</strong> only accessed with &lsquo;deploy&rsquo; user.
+Root  had no access to <strong>bundle exec</strong>.</p>
+
+<p>Solution: Modify provided Sidekiq init script, to make it run <strong>bundle exec</strong> as &lsquo;deploy&rsquo; user</p>
+
+<p>``` bash
+AS_USER=&ldquo;kienbd&rdquo;
+START_CMD=&ldquo;$BUNDLE exec $SIDEKIQ -e $APP_ENV -P $PID_FILE&rdquo;
+CMD=&ldquo;cd ${APP_DIR}; ${START_CMD} >> ${LOG_FILE} 2>&amp;1 &amp;&rdquo;</p>
+
+<h1>$START_CMD >> $LOG_FILE 2>&amp;1 &amp; #replaced this</h1>
+
+<p>su -c &ldquo;$CMD&rdquo; &ndash; $AS_USER # with this
+```
+To make it run at startup, use <strong>chkconfig</strong> to add this as new service. Moreover, you need to verify
+header of your script, make sure it is fired after <strong>redis-server</strong>.</p>
+
+<p><code>bash
+chkconfig --add name_of_new_service
+</code></p>
+
+<p>{% include_code [sidekiq] [lang:bash] sidekiq %}</p>
+]]></content>
+  </entry>
+  
+</feed>
