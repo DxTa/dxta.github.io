@@ -16,7 +16,7 @@
   <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
-  <link href="/stylesheets/all.1403061607.css" rel="stylesheet">
+  <link href="/stylesheets/all.1403061609.css" rel="stylesheet">
   
   <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <!-- <script src="/javascripts/modernizr-2.0.js"></script> -->
@@ -24,7 +24,6 @@
   <!-- <script src="/javascripts/octopress.js" type="text/javascript"></script> -->
   <script src="/javascripts/jquery.flexslider-min.js"></script>
   <script src="/javascripts/jquery.lazyload.min.js"></script>
-  <script src="/javascripts/all.1403061607.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Ta Minh Duc" type="application/atom+xml">
   
   <script>
@@ -257,6 +256,13 @@
   </script>
 
 
+<script type="text/javascript">
+(function() {
+  var all = document.createElement('script'); all.type = 'text/javascript'; all.async = true;
+  all.src = '{ { root_url } }/javascripts/all.js';
+  s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(all, s);
+})();
+</script>
 
 
 </body>
