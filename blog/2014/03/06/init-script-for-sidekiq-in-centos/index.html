@@ -1,24 +1,91 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: script | Ta Minh Duc]]></title>
-  <link href="http://DxTa.github.io/blog/categories/script/atom.xml" rel="self"/>
-  <link href="http://DxTa.github.io/"/>
-  <updated>2014-03-06T15:04:47+07:00</updated>
-  <id>http://DxTa.github.io/</id>
-  <author>
-    <name><![CDATA[Dx Ta]]></name>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="//use.typekit.net">
+  <link rel="dns-prefetch" href="//www.google-analytics.com">
+  <link rel="dns-prefetch" href="//disqus.com">
+  <link rel="dns-prefetch" href="//mediacdn.disqus.com">
+  <link rel="dns-prefetch" href="//www.gravatar.com">
+  <title>Init Script for Sidekiq in Centos - Ta Minh Duc - Developer</title>
+  <meta name="description" content="Init Script for Sidekiq in Centos">
+  <meta name="keywords" content="dxta, ta minh duc, blog, archive, rails, sidekiq, init.d, centos, script, dxta, ta minh duc, blog, portfolio"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="http://DxTa.github.io/blog/2014/03/06/init-script-for-sidekiq-in-centos">
+  <link href="/favicon.ico" rel="shortcut icon">
+  <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="/stylesheets/screen.css" rel="stylesheet">
+  
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="/javascripts/jquery.flexslider-min.js"></script>
+  <script src="/javascripts/jquery.lazyload.min.js"></script>
+  <link href="/atom.xml" rel="alternate" title="Ta Minh Duc" type="application/atom+xml">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-48348150-1', 'dxta.github.io');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+
+<body >
+  <header class="main-header" role="banner">
+        <h1><a href="/">Ta Minh Duc</a> &mdash; Developer</h1>
+    <nav role="navigation">
+      <ul class="main-nav">
+  <li><a href="/">Home</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/work">Work</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+    </nav>
+  </header>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
     
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+      <p class="meta">
+        
+
+
+
+
+
+
+
 
   
-  <entry>
-    <title type="html"><![CDATA[Init Script for Sidekiq in Centos]]></title>
-    <link href="http://DxTa.github.io/blog/2014/03/06/init-script-for-sidekiq-in-centos/"/>
-    <updated>2014-03-06T13:56:07+07:00</updated>
-    <id>http://DxTa.github.io/blog/2014/03/06/init-script-for-sidekiq-in-centos</id>
-    <content type="html"><![CDATA[<p>Sidekiq (<a href="http://sidekiq.org">http://sidekiq.org</a>) is a simple, efficient background processing for Ruby.</p>
+
+
+<time datetime="2014-03-06T13:56:07+07:00" pubdate data-updated="true">Mar 6<span>th</span>, 2014</time>
+        
+        | <a class="rss-feed" href="#">RSS Feed</a>
+      </p>
+    
+    
+      <h1 class="entry-title">Init Script for Sidekiq in Centos</h1>
+    
+  </header>
+
+
+<div class="entry-content"><p>Sidekiq (<a href="http://sidekiq.org">http://sidekiq.org</a>) is a simple, efficient background processing for Ruby.</p>
 
 <p>Sidekiq is easy to use, easy to setup. However, to make sidekiq run at startup is not so easy.
 There &rsquo;s also a nice script here (<a href="https://github.com/mperham/sidekiq/blob/master/examples/sidekiq">https://github.com/mperham/sidekiq/blob/master/examples/sidekiq</a>),
@@ -29,26 +96,32 @@ Root  had no access to <code>bundle exec</code>.</p>
 
 <p>Solution: Modify provided Sidekiq init script, to make it run <code>bundle exec</code> as &lsquo;deploy&rsquo; user.</p>
 
-<p>``` bash
-AS_USER=&ldquo;your_user&rdquo;
-START_CMD=&ldquo;$BUNDLE exec $SIDEKIQ -e $APP_ENV -P $PID_FILE&rdquo;
-CMD=&ldquo;cd ${APP_DIR}; ${START_CMD} >> ${LOG_FILE} 2>&amp;1 &amp;&rdquo;</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">AS_USER</span><span class="o">=</span><span class="s2">&quot;your_user&quot;</span>
+</span><span class='line'><span class="nv">START_CMD</span><span class="o">=</span><span class="s2">&quot;$BUNDLE exec $SIDEKIQ -e $APP_ENV -P $PID_FILE&quot;</span>
+</span><span class='line'><span class="nv">CMD</span><span class="o">=</span><span class="s2">&quot;cd ${APP_DIR}; ${START_CMD} &gt;&gt; ${LOG_FILE} 2&gt;&amp;1 &amp;&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># $START_CMD &gt;&gt; $LOG_FILE 2&gt;&amp;1 &amp; #replaced this</span>
+</span><span class='line'>su -c <span class="s2">&quot;$CMD&quot;</span> - <span class="nv">$AS_USER</span> <span class="c"># with this</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<h1>$START_CMD >> $LOG_FILE 2>&amp;1 &amp; #replaced this</h1>
-
-<p>su -c &ldquo;$CMD&rdquo; &ndash; $AS_USER # with this
-```</p>
 
 <p>To make it run at startup, use <code>chkconfig</code> to add this as new service. Moreover, you need to verify
 header of your script, make sure it is fired after <code>redis-server</code>.</p>
 
-<p><code>bash
-chkconfig --add name_of_new_service
-</code></p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>chkconfig --add name_of_new_service
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>Init Script after modified</h3>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>sidekiq  (sidekiq)</span> <a href='/downloads/code/sidekiq'>download</a></figcaption>
+<figure class='code'><figcaption><span>sidekiq  (sidekiq)</span> <a href='/downloads/code/sidekiq'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -257,11 +330,11 @@ chkconfig --add name_of_new_service
 </span><span class='line'>        stop
 </span><span class='line'>        ;;
 </span><span class='line'>    restart<span class="o">)</span>
-</span><span class='line'>	;;
+</span><span class='line'>  ;;
 </span><span class='line'>    reload<span class="o">)</span>
-</span><span class='line'>	;;
+</span><span class='line'>  ;;
 </span><span class='line'>    force_reload<span class="o">)</span>
-</span><span class='line'>	;;
+</span><span class='line'>  ;;
 </span><span class='line'>    status<span class="o">)</span>
 </span><span class='line'>        status
 </span><span class='line'>
@@ -279,92 +352,195 @@ chkconfig --add name_of_new_service
 </span><span class='line'>        ;;
 </span><span class='line'><span class="k">esac</span>
 </span><span class='line'><span class="nb">exit</span> <span class="nv">$RETVAL</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-]]></content>
-  </entry>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <entry>
-    <title type="html"><![CDATA[Invalid Login Snapping: Prevent Invalid Login Attempts Script for OSX]]></title>
-    <link href="http://DxTa.github.io/blog/2014/02/23/invalid-login-snapping-prevent-invalid-login-attempts-script-for-osx/"/>
-    <updated>2014-02-23T19:54:05+07:00</updated>
-    <id>http://DxTa.github.io/blog/2014/02/23/invalid-login-snapping-prevent-invalid-login-attempts-script-for-osx</id>
-    <content type="html"><![CDATA[<p>This script will take a snapshot on failed login attempts, email it to your email account,
-letting you know someone is currently trying to login to your macbook.</p>
 
-<h2>Requirement</h2>
+<span class="byline author vcard">Posted by <a href="/about" class="fn">Dx Ta</a></span>
+ <span>on</span>
+      
 
-<pre><code>1. imagesnap
-2. whereami
-3. An email account (I'm currently using Gmail)
-</code></pre>
 
-<h2>Configure Email</h2>
 
-<p>Append the following line to <strong>/etc/postfix/main.cf</strong></p>
 
-<p><code>bash /etc/post/fix/main.cf
-relayhost=smtp.gmail.com:587
-smtp_sasl_auth_enable=yes
-smtp_sasl_password_maps=hash:/etc/postfix/sasl_passwd
-smtp_sasl_security_options=
-smtp_use_tls=yes
-smtp_tls_security_level=encrypt
-tls_random_source=dev:/dev/urandom
-</code>
-Create <strong>/etc/postfix/sasl_passwd</strong> and populate following example below:</p>
 
-<pre><code>smtp.gmail.com:587 account@gmail.com:password
-</code></pre>
 
-<p>Then run:
-<code>bash
-postmap /etc/postfix/sasl_passwd; chmod 600 /etc/postfix/sasl_passwd*
-postfix stop
-postfix start
-</code></p>
 
-<h2>Enable Logging Failed Attempt</h2>
 
-<p>Append this line to <strong>/etc/asl.conf</strong></p>
-
-<pre><code># Facility loginwindow gets saved in loginwindow.log
-? [= Sender loginwindow] file /var/log/loginwindow.log mode=0640 format=bsd
-</code></pre>
-
-<p>Restart syslogd</p>
-
-<p><code>bash
-sudo launchctl unload /System/Library/LaunchDaemons/com.apple.syslogd.plist
-sudo launchctl load /System/Library/LaunchDaemons/com.apple.syslogd.plist
-</code></p>
-
-<h2>Scripting</h2>
-
-<p>Create script <strong>/usr/local/bin/invalid_login_snap</strong> :</p>
-
-<p><strong>Remember to change email to yours</strong>.</p>
-
-<p>``` bash</p>
-
-<h1>!/bin/sh</h1>
-
-<p>runcheck=<code>ps -ef|grep -v grep|grep 'tail -f /var/log/loginwindow.log' &gt; /dev/null;echo $?</code>
-zero=0;</p>
-
-<p>if [ $runcheck -ne $zero ]; then
-  nohup tail -f /var/log/loginwindow.log| awk &lsquo;/The authtok is incorrect/ {system(&ldquo;/usr/local/bin/imagesnap /var/tmp/.snap.jpg > /dev/null; (curl ipecho.net/plain ; echo; /usr/local/bin/whereami; uuencode /var/tmp/.snap.jpg snap.jpg)\|mailx -s \"Macbook Invalid Login Attempt\&rdquo; ductm310@gmail.com; echo \&ldquo;Someone Is Trying To Log Into Your Macbook Check Gmail for Snapshot\&rdquo; \|rm -f /var/tmp/.snap.jpg")}&rsquo; &amp;
-var/tmp/.snap.jpg
-fi
-```</p>
-
-<p><strong>Make sure your script is executable</strong></p>
-
-<h2>Autostart</h2>
-
-<p>There are many ways to make this script autostart.</p>
-
-<p>I use Automator to create application executing this script and add to StartupItems.</p>
-]]></content>
-  </entry>
   
-</feed>
+
+
+<time datetime="2014-03-06T13:56:07+07:00" pubdate data-updated="true">Mar 6<span>th</span>, 2014</time>.
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/centos/'>centos</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/script/'>script</a>, <a class='category' href='/blog/categories/sidekiq/'>sidekiq</a>
+  
+</span>
+
+
+      <span class="pull-request">If you would like to update this post, <a href="/2014-03-06-blog20140306init-script-for-sidekiq-in-centos.markdown"> please send a pull request</a> on GitHub.</span>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://DxTa.github.io/blog/2014/03/06/init-script-for-sidekiq-in-centos/" data-via="dx_ta" data-counturl="http://DxTa.github.io/blog/2014/03/06/init-script-for-sidekiq-in-centos/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/02/23/invalid-login-snapping-prevent-invalid-login-attempts-script-for-osx/" title="Previous Post: Invalid Login Snapping: Prevent Invalid Login Attempts Script for OSX">&laquo; Previous</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section class="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside>
+  
+    <section>
+  <h2>Recent Posts</h2>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/03/06/init-script-for-sidekiq-in-centos/">Init Script for Sidekiq in Centos</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/23/invalid-login-snapping-prevent-invalid-login-attempts-script-for-osx/">Invalid Login Snapping: Prevent Invalid Login Attempts Script for OSX</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus">
+  <h2>
+    <a href="https://plus.google.com/115109808691874046662?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h2>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer class="footer" role="contentinfo"><p>
+  &copy; 2014 Dx Ta
+  <span class="credit">&mdash; Powered by <a href="http://octopress.org">Octopress</a>, fonts served by <a href="https://typekit.com/colophons/yry3bon">Typekit</a>, hosted by <a href="https://github.com/DxTa/dxta.github.io">GitHub</a>.</span>
+</p>
+
+<p class="top"><a href="#">Back to top &uarr;</a></p>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('a[href^="#"]').on('click',function (e) {
+        e.preventDefault();
+
+        if (this.hash) {
+          $target = $(this.hash);
+          target = this.hash;
+        } else {
+          $target =  $('body');
+          target = '';
+        }
+
+        $('html, body').stop().animate({
+            'scrollTop': $target.offset().top
+        }, 400, 'swing', function () {
+            window.location.hash = target;
+        });
+    });
+    $(function() {
+        $("img.lazy").lazyload();
+    });
+
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+        $(this).attr('target', '_blank');
+      });
+    }
+
+  });
+</script>
+
+
+</footer>
+  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'dxta';
+      var disqus_developer = 1;
+
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://dxta.github.io/blog/2014/03/06/init-script-for-sidekiq-in-centos/';
+        var disqus_url = 'http://dxta.github.io/blog/2014/03/06/init-script-for-sidekiq-in-centos/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-48348150-1', 'dxta.github.io');
+    ga('send', 'pageview');
+
+  </script>
+
+
+
+</body>
+</html>
