@@ -4,7 +4,7 @@
   <title><![CDATA[Category: script | Ta Minh Duc]]></title>
   <link href="http://DxTa.github.io/blog/categories/script/atom.xml" rel="self"/>
   <link href="http://DxTa.github.io/"/>
-  <updated>2014-05-01T00:58:55+07:00</updated>
+  <updated>2014-05-01T01:05:34+07:00</updated>
   <id>http://DxTa.github.io/</id>
   <author>
     <name><![CDATA[Dx Ta]]></name>
@@ -48,7 +48,238 @@ chkconfig --add name_of_new_service
 
 <h3>Init Script after modified</h3>
 
-<p>{% include_code sidekiq lang:bash sidekiq %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>sidekiq  (sidekiq)</span> <a href='/downloads/code/sidekiq'>download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#! /bin/bash</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># sidekiq Init script for sidekiq</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># chkconfig: 345 25 75</span>
+</span><span class='line'><span class="c"># description: Starts and stops sidekiq message processor</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Source function library.</span>
+</span><span class='line'><span class="c"># . /etc/rc.d/init.d/functions</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># You will need to modify these</span>
+</span><span class='line'><span class="nv">APP</span><span class="o">=</span><span class="s2">&quot;your_app&quot;</span>
+</span><span class='line'><span class="nv">AS_USER</span><span class="o">=</span><span class="s2">&quot;your_user&quot;</span>
+</span><span class='line'><span class="nv">APP_DIR</span><span class="o">=</span><span class="s2">&quot;/home/your_user/${APP}&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">APP_CONFIG</span><span class="o">=</span><span class="s2">&quot;${APP_DIR}/config&quot;</span>
+</span><span class='line'><span class="nv">LOG_FILE</span><span class="o">=</span><span class="s2">&quot;$APP_DIR/log/sidekiq.log&quot;</span>
+</span><span class='line'><span class="nv">LOCK_FILE</span><span class="o">=</span><span class="s2">&quot;$APP_DIR/${APP}-lock&quot;</span>
+</span><span class='line'><span class="nv">PID_FILE</span><span class="o">=</span><span class="s2">&quot;$APP_DIR/${APP}.pid&quot;</span>
+</span><span class='line'><span class="nv">GEMFILE</span><span class="o">=</span><span class="s2">&quot;$APP_DIR/Gemfile&quot;</span>
+</span><span class='line'><span class="nv">SIDEKIQ</span><span class="o">=</span><span class="s2">&quot;sidekiq&quot;</span>
+</span><span class='line'><span class="nv">APP_ENV</span><span class="o">=</span><span class="s2">&quot;production&quot;</span>
+</span><span class='line'><span class="nv">BUNDLE</span><span class="o">=</span><span class="s2">&quot;bundle&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># [ -e /etc/sysconfig/sidekiq-your_app ] &amp;&amp; . /etc/sysconfig/sidekiq-your_app</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">START_CMD</span><span class="o">=</span><span class="s2">&quot;$BUNDLE exec $SIDEKIQ -e $APP_ENV -P $PID_FILE&quot;</span>
+</span><span class='line'><span class="nv">CMD</span><span class="o">=</span><span class="s2">&quot;cd ${APP_DIR}; ${START_CMD} &gt;&gt; ${LOG_FILE} 2&gt;&amp;1 &amp;&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">RETVAL</span><span class="o">=</span>0
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>start<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  status
+</span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq 1 <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">[</span> <span class="sb">`</span>id -u<span class="sb">`</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span> <span class="o">]</span> <span class="o">||</span> <span class="o">(</span><span class="nb">echo</span> <span class="s2">&quot;$SIDEKIQ runs as root only ..&quot;</span>; <span class="nb">exit </span>5<span class="o">)</span>
+</span><span class='line'>    <span class="o">[</span> -d <span class="nv">$APP_DIR</span> <span class="o">]</span> <span class="o">||</span> <span class="o">(</span><span class="nb">echo</span> <span class="s2">&quot;$APP_DIR not found!.. Exiting&quot;</span>; <span class="nb">exit </span>6<span class="o">)</span>
+</span><span class='line'>    <span class="nb">cd</span> <span class="nv">$APP_DIR</span>
+</span><span class='line'>    <span class="nb">echo</span> <span class="s2">&quot;Starting $SIDEKIQ message processor .. &quot;</span>
+</span><span class='line'>
+</span><span class='line'>    su -c <span class="s2">&quot;$CMD&quot;</span> - <span class="nv">$AS_USER</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
+</span><span class='line'>    <span class="c">#Sleeping for 8 seconds for process to be precisely visible in process table - See status ()</span>
+</span><span class='line'>    sleep 8
+</span><span class='line'>    <span class="o">[</span> <span class="nv">$RETVAL</span> -eq 0 <span class="o">]</span> <span class="o">&amp;&amp;</span> touch <span class="nv">$LOCK_FILE</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$RETVAL</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'><span class="k">    </span><span class="nb">echo</span> <span class="s2">&quot;$SIDEKIQ message processor is already running .. &quot;</span>
+</span><span class='line'>  <span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>stop<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">echo</span> <span class="s2">&quot;Stopping $SIDEKIQ message processor ..&quot;</span>
+</span><span class='line'>    <span class="nv">SIG</span><span class="o">=</span><span class="s2">&quot;INT&quot;</span>
+</span><span class='line'>    <span class="nb">kill</span> -<span class="nv">$SIG</span> <span class="sb">`</span>cat  <span class="nv">$PID_FILE</span><span class="sb">`</span>
+</span><span class='line'>    <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
+</span><span class='line'>    <span class="o">[</span> <span class="nv">$RETVAL</span> -eq 0 <span class="o">]</span> <span class="o">&amp;&amp;</span> rm -f <span class="nv">$LOCK_FILE</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$RETVAL</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>status<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  ps -ef | grep <span class="s1">&#39;sidekiq [0-9].[0-9].[0-9]&#39;</span> | grep -v grep
+</span><span class='line'>  <span class="k">return</span> <span class="nv">$?</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>restart<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  stop
+</span><span class='line'>  start
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>reload<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  restart
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>force_reload<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  restart
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">case</span> <span class="s2">&quot;$1&quot;</span> in
+</span><span class='line'>    start<span class="o">)</span>
+</span><span class='line'>        start
+</span><span class='line'>        ;;
+</span><span class='line'>    stop<span class="o">)</span>
+</span><span class='line'>        stop
+</span><span class='line'>        ;;
+</span><span class='line'>    restart<span class="o">)</span>
+</span><span class='line'>	;;
+</span><span class='line'>    reload<span class="o">)</span>
+</span><span class='line'>	;;
+</span><span class='line'>    force_reload<span class="o">)</span>
+</span><span class='line'>	;;
+</span><span class='line'>    status<span class="o">)</span>
+</span><span class='line'>        status
+</span><span class='line'>
+</span><span class='line'>        <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq 0 <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">             </span><span class="nb">echo</span> <span class="s2">&quot;$SIDEKIQ message processor is running ..&quot;</span>
+</span><span class='line'>             <span class="nv">RETVAL</span><span class="o">=</span>0
+</span><span class='line'>         <span class="k">else</span>
+</span><span class='line'><span class="k">             </span><span class="nb">echo</span> <span class="s2">&quot;$SIDEKIQ message processor is stopped ..&quot;</span>
+</span><span class='line'>             <span class="nv">RETVAL</span><span class="o">=</span>1
+</span><span class='line'>         <span class="k">fi</span>
+</span><span class='line'>        ;;
+</span><span class='line'>    *<span class="o">)</span>
+</span><span class='line'>        <span class="nb">echo</span> <span class="s2">&quot;Usage: $0 {start|stop|status}&quot;</span>
+</span><span class='line'>        <span class="nb">exit </span>0
+</span><span class='line'>        ;;
+</span><span class='line'><span class="k">esac</span>
+</span><span class='line'><span class="nb">exit</span> <span class="nv">$RETVAL</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 ]]></content>
   </entry>
   

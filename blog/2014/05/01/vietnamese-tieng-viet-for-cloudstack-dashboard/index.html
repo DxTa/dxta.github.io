@@ -8,10 +8,10 @@
   <link rel="dns-prefetch" href="//disqus.com">
   <link rel="dns-prefetch" href="//mediacdn.disqus.com">
   <link rel="dns-prefetch" href="//www.gravatar.com">
-  <title>Category: centos - Ta Minh Duc - Developer</title>
-  <meta name="description" content="Category: centos">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="http://DxTa.github.ioblog/categories/centos">
+  <title>Vietnamese - Tiếng Việt for CloudStack Dashboard - Ta Minh Duc - Developer</title>
+  <meta name="description" content="Vietnamese - Tiếng Việt for CloudStack Dashboard - message_vi_VN.properties">
+  <meta name="keywords" content="dxta, ta minh duc, blog, archive, cloudstack, vi_VN, language, dxta, ta minh duc, blog, portfolio"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="http://DxTa.github.io/blog/2014/05/01/vietnamese-tieng-viet-for-cloudstack-dashboard">
   <link href="/favicon.ico" rel="shortcut icon">
   <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -56,42 +56,123 @@
   </header>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
-<article class="article" role="article">
+      <div>
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: centos</h1>
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-01T00:34:05+07:00" pubdate data-updated="true">May 1<span>st</span>, 2014</time>
+        
+        | <a class="rss-feed" href="#">RSS Feed</a>
+      </p>
+    
+    
+      <h1 class="entry-title">Vietnamese - Tiếng Việt for CloudStack Dashboard</h1>
+    
   </header>
+
+
+<div class="entry-content"><p>Mặc định, Apache CloudStack đã hỗ trợ rất nhiều ngôn ngữ (Anh, Nhật, Trung Quốc, &hellip;), ngoại trừ tiếng Việt. Ở bài viết này tôi sẽ hướng dẫn cách add thêm tiếng Việt và cung cấp cả bản dịch của tôi.</p>
+
+<p>Lợi dụng Java ResourceBundle để tiến hành. Đầu tiên, đơn giản tại file <code>/WEB-INF/classes/resources/messages_&lt;language code&gt;.properties</code>. Các bạn có thể tải về tại <a href="https://gist.github.com/DxTa/9d400da1637a34512427" title="message_vi_VN.properties">gist</a> của mình. Hiện tại mình vẫn đang dịch, có thể có vài lỗi sử dụng từ vựng, câu văn chưa được hay, các bạn có thể góp ý trực tiếp cho mình.</p>
+
+<p>Tiếp đến, sửa file <code>index.jsp</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;select-language&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">select</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;language&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">...</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="n">option</span> <span class="n">value</span><span class="o">=</span><span class="s">&quot;vi_VN&quot;</span><span class="o">&gt;&lt;</span><span class="nl">fmt:</span><span class="n">message</span> <span class="n">key</span><span class="o">=</span><span class="s">&quot;label.lang.vietnamese&quot;</span><span class="o">/&gt;&lt;/</span><span class="n">option</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="n">select</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Thế là OK. Reload lại trang và thưởng thức thành quả.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <div class="page-content">
-    <div id="blog-archives" class="category">
+
+<span class="byline author vcard">Posted by <a href="/about" class="fn">Dx Ta</a></span>
+ <span>on</span>
+      
+
+
+
+
+
 
 
 
   
-  <h2>2014</h2>
 
-<article>
+
+<time datetime="2014-05-01T00:34:05+07:00" pubdate data-updated="true">May 1<span>st</span>, 2014</time>.
+      
+
+<span class="categories">
   
-<time datetime="2014-03-06T13:56:07+07:00" pubdate><span class='month'>Mar</span> <span class='day'>06</span> <span class='year'>2014</span></time>
-<h2><a href="/blog/2014/03/06/init-script-for-sidekiq-in-centos/">Init Script for Sidekiq in Centos</a></h2>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/centos/'>centos</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/script/'>script</a>, <a class='category' href='/blog/categories/sidekiq/'>sidekiq</a></span>
-</footer>
+    <a class='category' href='/blog/categories/cloudstack/'>cloudstack</a>, <a class='category' href='/blog/categories/vi-vn/'>vi_VN</a>
+  
+</span>
 
 
+      <span class="pull-request">If you would like to update this post, <a href="/2014-05-01-blog20140501vietnamese-tieng-viet-for-cloudstack-dashboard.markdown"> please send a pull request</a> on GitHub.</span>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://DxTa.github.io/blog/2014/05/01/vietnamese-tieng-viet-for-cloudstack-dashboard/" data-via="dx_ta" data-counturl="http://DxTa.github.io/blog/2014/05/01/vietnamese-tieng-viet-for-cloudstack-dashboard/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/06/init-script-for-sidekiq-in-centos/" title="Previous Post: Init Script for Sidekiq in Centos">&laquo; Previous</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section class="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
-  </div>
-  
-</article>
-
-</div>
-
-<aside class="sidebar">
+<aside>
   
     <section>
   <h2>Recent Posts</h2>
@@ -191,7 +272,10 @@
 
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://dxta.github.io/blog/2014/05/01/vietnamese-tieng-viet-for-cloudstack-dashboard/';
+        var disqus_url = 'http://dxta.github.io/blog/2014/05/01/vietnamese-tieng-viet-for-cloudstack-dashboard/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

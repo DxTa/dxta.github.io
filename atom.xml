@@ -4,7 +4,7 @@
   <title><![CDATA[Ta Minh Duc]]></title>
   <link href="http://DxTa.github.io/atom.xml" rel="self"/>
   <link href="http://DxTa.github.io/"/>
-  <updated>2014-04-04T21:18:55+07:00</updated>
+  <updated>2014-05-01T01:05:34+07:00</updated>
   <id>http://DxTa.github.io/</id>
   <author>
     <name><![CDATA[Dx Ta]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Vietnamese - Tiếng Việt for CloudStack Dashboard]]></title>
+    <link href="http://DxTa.github.io/blog/2014/05/01/vietnamese-tieng-viet-for-cloudstack-dashboard/"/>
+    <updated>2014-05-01T00:34:05+07:00</updated>
+    <id>http://DxTa.github.io/blog/2014/05/01/vietnamese-tieng-viet-for-cloudstack-dashboard</id>
+    <content type="html"><![CDATA[<p>Mặc định, Apache CloudStack đã hỗ trợ rất nhiều ngôn ngữ (Anh, Nhật, Trung Quốc, &hellip;), ngoại trừ tiếng Việt. Ở bài viết này tôi sẽ hướng dẫn cách add thêm tiếng Việt và cung cấp cả bản dịch của tôi.</p>
+
+<p>Lợi dụng Java ResourceBundle để tiến hành. Đầu tiên, đơn giản tại file <code>/WEB-INF/classes/resources/messages_&lt;language code&gt;.properties</code>. Các bạn có thể tải về tại <a href="https://gist.github.com/DxTa/9d400da1637a34512427" title="message_vi_VN.properties">gist</a> của mình. Hiện tại mình vẫn đang dịch, có thể có vài lỗi sử dụng từ vựng, câu văn chưa được hay, các bạn có thể góp ý trực tiếp cho mình.</p>
+
+<p>Tiếp đến, sửa file <code>index.jsp</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;select-language&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">select</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;language&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">...</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="n">option</span> <span class="n">value</span><span class="o">=</span><span class="s">&quot;vi_VN&quot;</span><span class="o">&gt;&lt;</span><span class="nl">fmt:</span><span class="n">message</span> <span class="n">key</span><span class="o">=</span><span class="s">&quot;label.lang.vietnamese&quot;</span><span class="o">/&gt;&lt;/</span><span class="n">option</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="n">select</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Thế là OK. Reload lại trang và thưởng thức thành quả.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Init Script for Sidekiq in Centos]]></title>
