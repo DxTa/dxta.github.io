@@ -16,7 +16,7 @@
   <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
-  <link href="/stylesheets/all.1405010110.css" rel="stylesheet">
+  <link href="/stylesheets/all.1405011038.css" rel="stylesheet">
   
   <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <!-- <script src="/javascripts/modernizr-2.0.js"></script> -->
@@ -87,7 +87,7 @@
 
 <div class="entry-content"><p>Mặc định, Apache CloudStack đã hỗ trợ rất nhiều ngôn ngữ (Anh, Nhật, Trung Quốc, &hellip;), ngoại trừ tiếng Việt. Ở bài viết này tôi sẽ hướng dẫn cách add thêm tiếng Việt và cung cấp cả bản dịch của tôi.</p>
 
-<p>Lợi dụng Java ResourceBundle để tiến hành. Đầu tiên, đơn giản tại file <code>/WEB-INF/classes/resources/messages_vi_VN.properties</code>. Các bạn có thể tải về tại <a href="https://gist.github.com/DxTa/9d400da1637a34512427" title="message_vi_VN.properties">gist</a> của mình. Hiện tại mình vẫn đang dịch, có thể có vài lỗi sử dụng từ vựng, câu văn chưa được hay, các bạn có thể góp ý trực tiếp cho mình.</p>
+<p>Lợi dụng Java ResourceBundle để tiến hành. Đầu tiên, đơn giản tại file <code>/WEB-INF/classes/resources/messages_vi_VN.properties</code>. Các bạn có thể tải về tại <a href="https://gist.github.com/DxTa/9d400da1637a34512427" title="message_vi_VN.properties">gist</a> hoặc <a href="https://gist.github.com/DxTa/5f32277932cebd261c3c" title="message_vi_VN.properties">gist &ndash; Unicode Escape Sequence</a> của mình. Hiện tại mình vẫn đang dịch, có thể có vài lỗi sử dụng từ vựng, câu văn chưa được hay, các bạn có thể góp ý trực tiếp cho mình.</p>
 
 <p>Tiếp đến, sửa file <code>index.jsp</code>:</p>
 
@@ -300,8 +300,8 @@
 
 <script type="text/javascript">
 (function() {
-  var all = document.createElement('script'); all.1405010110.type = 'text/javascript'; all.1405010110.async = true;
-  all.1405010110.src = '{ { root_url } }/javascripts/all.1405010110.js';
+  var all = document.createElement('script'); all.1405011038.type = 'text/javascript'; all.1405011038.async = true;
+  all.1405011038.src = '{ { root_url } }/javascripts/all.1405011038.js';
   s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(all, s);
 })();
 </script>

@@ -4,7 +4,7 @@
   <title><![CDATA[Ta Minh Duc]]></title>
   <link href="http://DxTa.github.io/atom.xml" rel="self"/>
   <link href="http://DxTa.github.io/"/>
-  <updated>2014-05-01T01:10:05+07:00</updated>
+  <updated>2014-05-01T10:38:16+07:00</updated>
   <id>http://DxTa.github.io/</id>
   <author>
     <name><![CDATA[Dx Ta]]></name>
@@ -20,7 +20,7 @@
     <id>http://DxTa.github.io/blog/2014/05/01/vietnamese-tieng-viet-for-cloudstack-dashboard</id>
     <content type="html"><![CDATA[<p>Mặc định, Apache CloudStack đã hỗ trợ rất nhiều ngôn ngữ (Anh, Nhật, Trung Quốc, &hellip;), ngoại trừ tiếng Việt. Ở bài viết này tôi sẽ hướng dẫn cách add thêm tiếng Việt và cung cấp cả bản dịch của tôi.</p>
 
-<p>Lợi dụng Java ResourceBundle để tiến hành. Đầu tiên, đơn giản tại file <code>/WEB-INF/classes/resources/messages_vi_VN.properties</code>. Các bạn có thể tải về tại <a href="https://gist.github.com/DxTa/9d400da1637a34512427" title="message_vi_VN.properties">gist</a> của mình. Hiện tại mình vẫn đang dịch, có thể có vài lỗi sử dụng từ vựng, câu văn chưa được hay, các bạn có thể góp ý trực tiếp cho mình.</p>
+<p>Lợi dụng Java ResourceBundle để tiến hành. Đầu tiên, đơn giản tại file <code>/WEB-INF/classes/resources/messages_vi_VN.properties</code>. Các bạn có thể tải về tại <a href="https://gist.github.com/DxTa/9d400da1637a34512427" title="message_vi_VN.properties">gist</a> hoặc <a href="https://gist.github.com/DxTa/5f32277932cebd261c3c" title="message_vi_VN.properties">gist &ndash; Unicode Escape Sequence</a> của mình. Hiện tại mình vẫn đang dịch, có thể có vài lỗi sử dụng từ vựng, câu văn chưa được hay, các bạn có thể góp ý trực tiếp cho mình.</p>
 
 <p>Tiếp đến, sửa file <code>index.jsp</code>:</p>
 
