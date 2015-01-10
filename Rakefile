@@ -67,7 +67,8 @@ desc "Generate jekyll site"
   # system "jekyll"
 # end
 # task :generate => [:sass, :update_asset_versions, :jekyll, :combine, :minify, :gzip]
-task :generate => [:sass, :update_asset_versions, :jekyll, :combine, :minify]
+# task :generate => [:sass, :update_asset_versions, :jekyll, :combine, :minify]
+task :generate => [:sass, :update_asset_versions, :jekyll, :minify]
 
 desc "Watch the site and regenerate when it changes"
 task :watch do

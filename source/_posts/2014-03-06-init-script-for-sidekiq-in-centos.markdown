@@ -35,4 +35,4 @@ header of your script, make sure it is fired after __redis-server__.
 chkconfig --add name_of_new_service
 ```
 
-{% include_code [sidekiq] [lang:bash] sidekiq %}
+{% include_code [sidekiq] [lang:bash ] sidekiq %}
