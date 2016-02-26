@@ -69,6 +69,11 @@ video#bgvid {
   transform: translateY(-50%);
   margin: 0 auto;
 }
+.portfolio-item .portfolio-caption p, .portfolio-item .portfolio-caption h4 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 ul.list-inline.intro-social-buttons li {
   margin-bottom: 7px;
 }
