@@ -1,0 +1,116 @@
+<div class="highlight"><pre><span class="c">#! /bin/bash</span>
+<span class="c">#</span>
+<span class="c"># sidekiq Init script for sidekiq</span>
+<span class="c">#</span>
+<span class="c"># chkconfig: 345 25 75</span>
+<span class="c"># description: Starts and stops sidekiq message processor</span>
+
+<span class="c"># Source function library.</span>
+<span class="c"># . /etc/rc.d/init.d/functions</span>
+
+<span class="c"># You will need to modify these</span>
+<span class="nv">APP</span><span class="o">=</span><span class="s2">&quot;your_app&quot;</span>
+<span class="nv">AS_USER</span><span class="o">=</span><span class="s2">&quot;your_user&quot;</span>
+<span class="nv">APP_DIR</span><span class="o">=</span><span class="s2">&quot;/home/your_user/${APP}&quot;</span>
+
+<span class="nv">APP_CONFIG</span><span class="o">=</span><span class="s2">&quot;${APP_DIR}/config&quot;</span>
+<span class="nv">LOG_FILE</span><span class="o">=</span><span class="s2">&quot;$APP_DIR/log/sidekiq.log&quot;</span>
+<span class="nv">LOCK_FILE</span><span class="o">=</span><span class="s2">&quot;$APP_DIR/${APP}-lock&quot;</span>
+<span class="nv">PID_FILE</span><span class="o">=</span><span class="s2">&quot;$APP_DIR/${APP}.pid&quot;</span>
+<span class="nv">GEMFILE</span><span class="o">=</span><span class="s2">&quot;$APP_DIR/Gemfile&quot;</span>
+<span class="nv">SIDEKIQ</span><span class="o">=</span><span class="s2">&quot;sidekiq&quot;</span>
+<span class="nv">APP_ENV</span><span class="o">=</span><span class="s2">&quot;production&quot;</span>
+<span class="nv">BUNDLE</span><span class="o">=</span><span class="s2">&quot;bundle&quot;</span>
+
+<span class="c"># [ -e /etc/sysconfig/sidekiq-your_app ] &amp;&amp; . /etc/sysconfig/sidekiq-your_app</span>
+
+<span class="nv">START_CMD</span><span class="o">=</span><span class="s2">&quot;$BUNDLE exec $SIDEKIQ -e $APP_ENV -P $PID_FILE&quot;</span>
+<span class="nv">CMD</span><span class="o">=</span><span class="s2">&quot;cd ${APP_DIR}; ${START_CMD} &gt;&gt; ${LOG_FILE} 2&gt;&amp;1 &amp;&quot;</span>
+
+<span class="nv">RETVAL</span><span class="o">=</span>0
+
+
+start<span class="o">()</span> <span class="o">{</span>
+
+  status
+  <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq 1 <span class="o">]</span>; <span class="k">then</span>
+
+    <span class="o">[</span> <span class="sb">`</span>id -u<span class="sb">`</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span> <span class="o">]</span> <span class="o">||</span> <span class="o">(</span><span class="nb">echo</span> <span class="s2">&quot;$SIDEKIQ runs as root only ..&quot;</span>; <span class="nb">exit </span>5<span class="o">)</span>
+    <span class="o">[</span> -d <span class="nv">$APP_DIR</span> <span class="o">]</span> <span class="o">||</span> <span class="o">(</span><span class="nb">echo</span> <span class="s2">&quot;$APP_DIR not found!.. Exiting&quot;</span>; <span class="nb">exit </span>6<span class="o">)</span>
+    <span class="nb">cd</span> <span class="nv">$APP_DIR</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Starting $SIDEKIQ message processor .. &quot;</span>
+
+    su -c <span class="s2">&quot;$CMD&quot;</span> - <span class="nv">$AS_USER</span>
+
+    <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
+    <span class="c">#Sleeping for 8 seconds for process to be precisely visible in process table - See status ()</span>
+    sleep 8
+    <span class="o">[</span> <span class="nv">$RETVAL</span> -eq 0 <span class="o">]</span> <span class="o">&amp;&amp;</span> touch <span class="nv">$LOCK_FILE</span>
+    <span class="k">return</span> <span class="nv">$RETVAL</span>
+  <span class="k">else</span>
+<span class="k">    </span><span class="nb">echo</span> <span class="s2">&quot;$SIDEKIQ message processor is already running .. &quot;</span>
+  <span class="k">fi</span>
+
+
+<span class="o">}</span>
+
+stop<span class="o">()</span> <span class="o">{</span>
+
+    <span class="nb">echo</span> <span class="s2">&quot;Stopping $SIDEKIQ message processor ..&quot;</span>
+    <span class="nv">SIG</span><span class="o">=</span><span class="s2">&quot;INT&quot;</span>
+    <span class="nb">kill</span> -<span class="nv">$SIG</span> <span class="sb">`</span>cat  <span class="nv">$PID_FILE</span><span class="sb">`</span>
+    <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
+    <span class="o">[</span> <span class="nv">$RETVAL</span> -eq 0 <span class="o">]</span> <span class="o">&amp;&amp;</span> rm -f <span class="nv">$LOCK_FILE</span>
+    <span class="k">return</span> <span class="nv">$RETVAL</span>
+<span class="o">}</span>
+
+status<span class="o">()</span> <span class="o">{</span>
+
+  ps -ef | grep <span class="s1">&#39;sidekiq [0-9].[0-9].[0-9]&#39;</span> | grep -v grep
+  <span class="k">return</span> <span class="nv">$?</span>
+<span class="o">}</span>
+
+restart<span class="o">()</span> <span class="o">{</span>
+  stop
+  start
+<span class="o">}</span>
+
+reload<span class="o">()</span> <span class="o">{</span>
+  restart
+<span class="o">}</span>
+
+force_reload<span class="o">()</span> <span class="o">{</span>
+  restart
+<span class="o">}</span>
+
+<span class="k">case</span> <span class="s2">&quot;$1&quot;</span> in
+    start<span class="o">)</span>
+        start
+        ;;
+    stop<span class="o">)</span>
+        stop
+        ;;
+    restart<span class="o">)</span>
+	;;
+    reload<span class="o">)</span>
+	;;
+    force_reload<span class="o">)</span>
+	;;
+    status<span class="o">)</span>
+        status
+
+        <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq 0 <span class="o">]</span>; <span class="k">then</span>
+<span class="k">             </span><span class="nb">echo</span> <span class="s2">&quot;$SIDEKIQ message processor is running ..&quot;</span>
+             <span class="nv">RETVAL</span><span class="o">=</span>0
+         <span class="k">else</span>
+<span class="k">             </span><span class="nb">echo</span> <span class="s2">&quot;$SIDEKIQ message processor is stopped ..&quot;</span>
+             <span class="nv">RETVAL</span><span class="o">=</span>1
+         <span class="k">fi</span>
+        ;;
+    *<span class="o">)</span>
+        <span class="nb">echo</span> <span class="s2">&quot;Usage: $0 {start|stop|status}&quot;</span>
+        <span class="nb">exit </span>0
+        ;;
+<span class="k">esac</span>
+<span class="nb">exit</span> <span class="nv">$RETVAL</span>
+</pre></div>

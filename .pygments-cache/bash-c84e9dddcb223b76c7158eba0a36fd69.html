@@ -1,0 +1,7 @@
+<div class="highlight"><pre><span class="nv">AS_USER</span><span class="o">=</span><span class="s2">&quot;kienbd&quot;</span>
+<span class="nv">START_CMD</span><span class="o">=</span><span class="s2">&quot;$BUNDLE exec $SIDEKIQ -e $APP_ENV -P $PID_FILE&quot;</span>
+<span class="nv">CMD</span><span class="o">=</span><span class="s2">&quot;cd ${APP_DIR}; ${START_CMD} &gt;&gt; ${LOG_FILE} 2&gt;&amp;1 &amp;&quot;</span>
+
+<span class="c"># $START_CMD &gt;&gt; $LOG_FILE 2&gt;&amp;1 &amp; #replaced this</span>
+su -c <span class="s2">&quot;$CMD&quot;</span> - <span class="nv">$AS_USER</span> <span class="c"># with this</span>
+</pre></div>

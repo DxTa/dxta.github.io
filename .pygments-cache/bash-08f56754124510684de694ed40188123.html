@@ -1,0 +1,10 @@
+<div class="highlight"><pre><span class="c">#!/bin/sh</span>
+
+<span class="nv">runcheck</span><span class="o">=</span><span class="sb">`</span>ps -ef|grep -v grep|grep <span class="s1">&#39;tail -f /var/log/loginwindow.log&#39;</span> &gt; /dev/null;echo <span class="nv">$?</span><span class="sb">`</span>
+<span class="nv">zero</span><span class="o">=</span>0;
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$runcheck</span> -ne <span class="nv">$zero</span> <span class="o">]</span>; <span class="k">then</span>
+<span class="k">  </span>nohup tail -f /var/log/loginwindow.log| awk <span class="s1">&#39;/The authtok is incorrect/ {system(&quot;/usr/local/bin/imagesnap /var/tmp/.snap.jpg &gt; /dev/null; \(curl ipecho.net/plain ; echo; /usr/local/bin/whereami; uuencode /var/tmp/.snap.jpg snap.jpg\)\|mailx -s \&quot;Macbook Invalid Login Attempt\&quot; ductm310@gmail.com; echo \&quot;Someone Is Trying To Log Into Your Macbook Check Gmail for Snapshot\&quot; \|rm -f /var/tmp/.snap.jpg&quot;)}&#39;</span> &amp;
+var/tmp/.snap.jpg
+<span class="k">fi</span>
+</pre></div>
